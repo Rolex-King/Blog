@@ -26,8 +26,8 @@ def create
 #@article = Article.new(title: params[:article][:title], 
 					#   body: params[:article][:body])
 #@article = Article.new(article_params)
-if user_signed_in?
 @article = current_user.articles.new(article_params)
+@article.categories = params[:categories]
 
 if @article.save()
 	redirect_to @article
@@ -35,15 +35,12 @@ else
 	render :new  
 end
 
-else
-
-render :new
-end
 end
 
 
 def new 
 @article = Article.new
+@categories = Category.all
 end
 
 def edit
@@ -70,7 +67,7 @@ end
 
 
 private def article_params
-params.require(:article).permit(:title,:body,:cover)
+params.require(:article).permit(:title,:body,:cover,:categories)
 end
 
 
