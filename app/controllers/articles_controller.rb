@@ -3,6 +3,8 @@ class ArticlesController < ApplicationController
 before_action :authenticate_user!, except: [:index,:show]
 #El siguiente callback es para las acciones que no necesitan un recibir un id como parámetro
 before_action :set_article, except: [:index,:new,:create]
+before_action :authenticate_editor!, only: [:new,:create,:update]
+before_action :authenticate_admin!, only: [:destroy]
 
 #A esta ruta se accede con GET /articles
 def index

@@ -2,6 +2,11 @@ class Article < ActiveRecord::Base
 
 belongs_to :user
 has_many :comments
+has_many :categories, through: :has_categories
+has_many :has_categories
+
+
+
 #Presence true valida que el elemento no este vacio
 validates :title, presence: true, uniqueness: true
 validates :body, presence:true, length: {minimum: 20}
