@@ -1,0 +1,43 @@
+<h1> <%= @article.title %> </h1>
+
+<!--unless es = a if not -> salvo que el usuario sea nulo haz lo siguiente:-->
+<% unless @article.user.nil? %>
+<p>
+Escrito por: <%= @article.user.email %>
+</p>
+<%else%>
+<p>Este artículo fue escrito por un visitante no registrado</p>
+<%end%>
+
+<div class="field">
+<%= image_tag @article.cover.url(:thumb) %>
+</div>
+
+
+<div>
+<h3> <%= @article.body %></h3>
+<p>Este artículo ha sido leido <%=@article.visits_count %> veces</p>
+</div>
+
+<div>
+<%= link_to	"Editar", edit_article_path(@article) %>
+</div>
+
+<br><br>
+
+<div class="field">
+<h3>Comentarios</h3>
+<%= render "comments/form" %>
+
+<br>
+
+<ul id="listaComentarios">
+<% @article.comments.each do |comment| %>
+<li>
+<%= comment.body %> -> por: <%= comment.user.email %>
+</li>
+<%end%>
+
+</ul>
+</div>
+

@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+<h1>Bienvenido <%= current_user.email %> </h1>
+<% else%>
+<h1>Bienvenido</h1>
+<%end%>
+<% [1,2,3,4].each do |number| %>
+<p>Número: <%= number %></p>
+<%end%>
