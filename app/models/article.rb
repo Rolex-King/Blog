@@ -1,5 +1,7 @@
 class Article < ActiveRecord::Base
 
+include AASM
+
 belongs_to :user
 has_many :comments
 has_many :categories, through: :has_categories
@@ -20,7 +22,7 @@ has_attached_file :cover, styles: { medium: "1280x720", thumb:"800x600"}
 validates_attachment_content_type :cover, content_type: /\Aimage\/.*\Z/
 
 
-#Custom Setter
+#Custom Setter o atributo virtual
 def categories=(value)
 @categories = value
 end
@@ -29,8 +31,23 @@ def update_visits_count
 self.update(visits_count: self.visits_count + 1)
 end
 
-private 
 
+aasm column: "state" do
+state :in_draft, initial: true
+state :published
+
+event :publish do
+transitions from: :in_draft, to: :published
+end
+
+event :unpublish do
+transitions from: :published, to: :in_draft
+end
+
+end
+
+
+private 
 
 def save_categories
 @categories.each do |category_id|
