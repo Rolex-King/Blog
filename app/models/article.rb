@@ -22,6 +22,15 @@ has_attached_file :cover, styles: { medium: "1280x720", thumb:"800x600"}
 validates_attachment_content_type :cover, content_type: /\Aimage\/.*\Z/
 
 
+#Scope para la busqueda de los articulos cuyo state es published, el primer parámetro es el nombre del método de clase que llevara :publicados
+#Como segundo parámetro recibe una expresión lambda, son las condiciones que se van a ejecutar sobre el métodos 
+scope :publicados, ->{ where(state: "published") }
+
+#Esto normalmente lo hacemos para definir diferentes grupos, en este caso ordenaras los articulos por fecha de creación descendiente y lo limitamos a 10 artículos
+#Lo interesante de los scopes es que son encadenables
+#La query que lanzará el método index de articles sera una combinación de los dos scopes que hemos creado
+scope :ultimos, -> { order("created_at DESC")}
+
 #Custom Setter o atributo virtual
 def categories=(value)
 @categories = value

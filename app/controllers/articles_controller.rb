@@ -4,11 +4,12 @@ before_action :authenticate_user!, except: [:index,:show]
 #El siguiente callback es para las acciones que no necesitan un recibir un id como parámetro
 before_action :set_article, except: [:index,:new,:create]
 before_action :authenticate_editor!, only: [:new,:create,:update]
-before_action :authenticate_admin!, only: [:destroy]
+before_action :authenticate_admin!, only: [:destroy,:publish]
 
 #A esta ruta se accede con GET /articles
-def index
-@articles = Article.all
+def index	
+#@articles = Article.publicados.ultimos
+@articles = Article.paginate(page: params[:page],per_page:5).publicados.ultimos
 end
 
 #GET /articles/id
@@ -56,6 +57,11 @@ if @article.update(article_params)
 else
 render :edit
 end
+end
+
+def publish
+@article.publish!
+redirect_to @article
 end
 
 def destroy

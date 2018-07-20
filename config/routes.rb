@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   get "special", to: "welcome#"
   root 'welcome#index'
 
+  get 'dashboard', to: "welcome#dashboard"
+
+  put "/articles/:id/publish" , to: "articles#publish"
+
 
 =begin 
   resources articles:, except: [delete]
