@@ -43,6 +43,10 @@ margin: 0;
 background-color: #E74C3C;
 }
 
+.text-center{
+	text-align: center;
+}
+
 .red{
 background-color: #E74C3C;
 border: 2px solid red;
@@ -70,6 +74,27 @@ padding: 8px 5px;
 
 .text-left{
 	text-align: left;
+}
+
+.relative{
+position: relative;
+}
+
+.absolute{
+position: absolute;	
+}
+
+.article-heigth{
+ height: 115px;
+}
+
+.background-cover{
+background-position: center;
+background-size:cover;
+}
+
+.cajaArticulo{
+	height: 120px;
 }
 
 .form-control{

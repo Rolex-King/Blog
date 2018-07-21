@@ -1,10 +1,36 @@
+<h1 class="text-center">Artículos</h1>
 
+<div class="container" style="margin:0 auto;">
+	
+	<div class="row">
+	<% @articles.each do |article| %>
+	
+	<div class="col-md-4 top-space">
 
+	<div class="box relative article-height">
+	<div class="absolute article-heigth background-cover " 
+	style="background:url(<%= article.cover.url() %>);top:0px;left:0px;width: 100%;">
+	</div>	
 
-<% @articles.each do |article| %>
-<h1><%= link_to article.title, article, method: :get %></h1>
-<div>
-<%= article.body %>	
+	<div class="absolute article-heigth background-cover " 
+	style="background:rgba(0,0,0,0.5);top:0px;left:0px;width: 100%;">
+	</div>	
+
+	<div class="relative white text-center">
+<h2><%= link_to article.title, article %></h2>
+<p>
+<%= truncate(article.body,length:30) %>
+</p>
+
 </div>
+
+</div>
+
+
+</div> 
 <%end%>
+</div>
+<div class="top-space text-center">
 <%= will_paginate @articles %>
+</div>
+</div>

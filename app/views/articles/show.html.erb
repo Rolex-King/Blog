@@ -21,7 +21,7 @@ Escrito por: <%= @article.user.email %>
 
 
 <div>
-<h3> <%= @article.body %></h3>
+<h3> <%= Sanitize.fragment(@article.body,Sanitize::Config::RELAXED).html_safe %></h3>
 <p>Este artículo ha sido leido <%=@article.visits_count %> veces</p>
 </div>
 
@@ -36,7 +36,7 @@ Escrito por: <%= @article.user.email %>
 <h3>Comentarios</h3>
 <%= render "comments/form" %>
 
-<br>
+<br><br><br>
 
 <ul id="listaComentarios">
 <% @article.comments.each do |comment| %>

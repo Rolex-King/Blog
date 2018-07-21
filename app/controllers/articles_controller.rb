@@ -9,7 +9,7 @@ before_action :authenticate_admin!, only: [:destroy,:publish]
 #A esta ruta se accede con GET /articles
 def index	
 #@articles = Article.publicados.ultimos
-@articles = Article.paginate(page: params[:page],per_page:5).publicados.ultimos
+@articles = Article.paginate(page: params[:page],per_page:9).publicados.ultimos
 end
 
 #GET /articles/id
@@ -75,7 +75,7 @@ end
 
 
 private def article_params
-params.require(:article).permit(:title,:body,:cover,:categories)
+params.require(:article).permit(:title,:body,:cover,:categories,:markup_body)
 end
 
 

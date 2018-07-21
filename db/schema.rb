@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180719184530) do
+ActiveRecord::Schema.define(version: 20180721115026) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",              limit: 255
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20180719184530) do
     t.integer  "cover_file_size",    limit: 4
     t.datetime "cover_updated_at"
     t.string   "state",              limit: 255,   default: "in_draft"
+    t.text     "markup_body",        limit: 65535
   end
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
