@@ -1,50 +1,29 @@
-<h1> <%= @article.title %> </h1>
+<article class="bottom-space">
+	<%= article_cover @article.cover.url() %>
+	<div class="row center-xs">
+		<div class="col-xs-12 light-border col-md-7">
+			<h1 class="be-big blue">
+				<%= @article.title %>
+			</h1>
+			<p class="text-right be-small"> <%= link_to "Atrás", articles_path, class:"underline" %> 
+			<span class="red"> <%= @article.visits_count %> visita(s) </span>
+			-
+					<!--unless es = a if not -> salvo que el usuario sea nulo haz lo siguiente:-->
+					<% unless @article.user.nil? %>
+					Escrito por: <%= @article.user.email %>
+					<%else%>
+					<p>Este artículo fue escrito por un visitante no registrado</p>
+					<%end%>
+			</p>
 
-<!--unless es = a if not -> salvo que el usuario sea nulo haz lo siguiente:-->
-<% unless @article.user.nil? %>
-<p>
-Escrito por: <%= @article.user.email %>
-</p>
-<%else%>
-<p>Este artículo fue escrito por un visitante no registrado</p>
-<%end%>
+			<div class="text-justify">
+				<%= Sanitize.fragment(@article.body,Sanitize::Config::RELAXED).html_safe %>
+			</div>
 
-<div class="field">
-<% @article.categories.each do |category| %>
-<%= link_to category.name, category, style:"color:#{category.color};" %>
-<%end%>
-</div>
+					<div class="top-space">
+						<%= render "articles/comments" %>
+					</div>
 
-<div class="field">
-<%= image_tag @article.cover.url(:thumb) %>
-</div>
-
-
-<div>
-<h3> <%= Sanitize.fragment(@article.body,Sanitize::Config::RELAXED).html_safe %></h3>
-<p>Este artículo ha sido leido <%=@article.visits_count %> veces</p>
-</div>
-
-<div>
-<%= link_to	"Editar", edit_article_path(@article) %>
-</div>
-
-
-<br><br>
-
-<div class="field">
-<h3>Comentarios</h3>
-<%= render "comments/form" %>
-
-<br><br><br>
-
-<ul id="listaComentarios">
-<% @article.comments.each do |comment| %>
-<li>
-<%= comment.body %> -> por: <%= comment.user.email %>
-</li>
-<%end%>
-
-</ul>
-</div>
-
+		</div>
+	</div>
+</article>

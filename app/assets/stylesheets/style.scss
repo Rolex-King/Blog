@@ -43,8 +43,27 @@ margin: 0;
 background-color: #E74C3C;
 }
 
+.be-big{
+font-size:2em;
+}
+
+.be-small{
+font-size: 12px;
+}
+
+.bottom-space{
+margin-bottom: 2em;
+}
 .text-center{
-	text-align: center;
+text-align: center;
+}
+
+.text-right{
+text-align: right;
+}
+
+.text-justify{
+	text-align: justify;
 }
 
 .red{
@@ -69,6 +88,10 @@ padding: 8px 5px;
 
 .field,.top-space,.actions{
 	margin-top:1em;
+}
+
+.hidden{
+ display: none !important;
 }
 
 
